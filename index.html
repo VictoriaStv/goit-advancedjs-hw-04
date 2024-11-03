@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css"
+    />
+    <script type="module" crossorigin src="/goit-advancedjs-hw-04/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-advancedjs-hw-04/assets/vendor-C4-ZuMk8.js">
+    <link rel="stylesheet" crossorigin href="/goit-advancedjs-hw-04/assets/vendor-CWKLx11g.css">
+    <link rel="stylesheet" crossorigin href="/goit-advancedjs-hw-04/assets/index-CT_wXk5i.css">
+  </head>
+  <body>
+    <main>
+      <form class="form-container">
+        <label>
+          <input
+            class="form-input"
+            type="text"
+            name="query"
+            autocomplete="off"
+            placeholder="Search images..."
+          />
+        </label>
+        <button class="start-button" type="submit">Search</button>
+      </form>
+
+      <div class="downloader" style="display: none"></div>
+      <p class="loading-message" style="display: none">
+        Loading images, please wait...
+      </p>
+      <ul class="gallery"></ul>
+      <button class="load-more" style="display: none">Load more</button>
+    </main>
+  </body>
+</html>

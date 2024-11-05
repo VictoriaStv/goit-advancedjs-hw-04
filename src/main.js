@@ -11,6 +11,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 const loadingMessage = document.querySelector('.loading-message');
 let currentPage = 1;
 let currentQuery = '';
+let totalLoadedImages = 0;
 
 form.addEventListener('submit', async event => {
   event.preventDefault();
@@ -26,6 +27,7 @@ form.addEventListener('submit', async event => {
   loadingMessage.style.display = 'block';
   loadMoreBtn.style.display = 'none';
   currentPage = 1;
+  totalLoadedImages = 0;
 
   try {
     const data = await fetchImages(currentQuery, currentPage);
@@ -40,7 +42,10 @@ form.addEventListener('submit', async event => {
       );
     } else {
       renderGallery(data.hits);
-      loadMoreBtn.style.display = 'block';
+      totalLoadedImages += data.hits.length;
+      if (totalLoadedImages < data.totalHits) {
+        loadMoreBtn.style.display = 'block';
+      }
       showToast('success', 'Images loaded successfully!', 'Success');
     }
   } catch (error) {
@@ -60,7 +65,10 @@ loadMoreBtn.addEventListener('click', async () => {
     loader.style.display = 'none';
     loadingMessage.style.display = 'none';
 
-    if (data.hits.length === 0) {
+    renderGallery(data.hits);
+    totalLoadedImages += data.hits.length;
+
+    if (totalLoadedImages >= data.totalHits) {
       loadMoreBtn.style.display = 'none';
       showToast(
         'fail',
@@ -68,7 +76,6 @@ loadMoreBtn.addEventListener('click', async () => {
         'End'
       );
     } else {
-      renderGallery(data.hits);
       scrollPage();
       showToast('success', 'More images loaded!', 'Success');
     }
